@@ -1,5 +1,16 @@
+import { useSelector } from "react-redux";
+import EditProfile from "./EditProfile";
 const Profile = () => {
-  return <h1>Profile</h1>;
+  const user = useSelector((appStore) => appStore.user);
+  
+
+  return (
+    <div className="flex justify-center mx-10">
+      <div className="">
+        <EditProfile user={user} />
+      </div>
+    </div>
+  );
 };
 
 export default Profile;

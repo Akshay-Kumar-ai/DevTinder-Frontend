@@ -4,23 +4,33 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Base_Url } from "../utils/constants";
 import { addUser } from "../utils/userSlice";
+// import { Eye, EyeOff } from "lucide-react";
 const Login = () => {
   const [emailId, setEmailId] = useState("shivam@gmail.com");
   const [password, setPassword] = useState("Shivam@123");
+  const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleLogin = async () => {
     try {
-      const res = await axios.post(Base_Url + "/login", {
-        emailId,
-        password,
-      });
+      const res = await axios.post(
+        Base_Url + "/login",
+        {
+          emailId,
+          password,
+        },
+        {
+          withCredentials: true, // ✅ required
+        }
+      );
       //   console.log(res.data);
       dispatch(addUser(res.data));
       navigate("/");
     } catch (err) {
-      console.error(err);
+      setError(err?.response?.data || "Something went wrong");
+      // console.error(err?.response?.data);
     }
   };
   return (
@@ -72,7 +82,7 @@ const Login = () => {
               </g>
             </svg>
             <input
-              type="password"
+              type={showPassword ? "text" : "password"}
               required
               placeholder="Password"
               minLength="8"
@@ -81,7 +91,19 @@ const Login = () => {
               input={password}
               onChange={(e) => setPassword(e.target.value)}
             />
+            <button
+              type="button"
+              onClick={() => setShowPassword(!showPassword)}
+              className="absolute right-2 bg-transparent"
+            >
+              {password.length > 0 && (
+                <p className="text-gray-300 hover:text-gray-500">
+                  Show password
+                </p>
+              )}
+            </button>
           </label>
+
           <p className="validator-hint hidden">
             Must be more than 8 characters, including
             <br />
@@ -90,6 +112,7 @@ const Login = () => {
             At least one uppercase letter
           </p>
           <div className="card-actions justify-end">
+            <p className="text-red-600">{error}</p>
             <button className="btn btn-primary" onClick={handleLogin}>
               Login
             </button>
