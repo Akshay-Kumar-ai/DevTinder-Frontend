@@ -1,17 +1,19 @@
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Base_Url } from "../utils/constants";
 import { removeUser } from "../utils/userSlice";
 
 const NavBar = () => {
   const user = useSelector((appStore) => appStore.user);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleLogout = async () => {
     try {
-      await axios.post(Base_Url + "/logout");
+      await axios.post(Base_Url + "/logout", {}, { withCredentials: true });
       dispatch(removeUser());
+      return navigate("/login");
     } catch (err) {
       console.error(err);
     }
@@ -36,31 +38,33 @@ const NavBar = () => {
                 <div className="w-10 rounded-full">
                   <img
                     alt="Tailwind CSS Navbar component"
-                    src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+                    src={
+                      user.photoUrl
+                        ? user.photoUrl
+                        : "https://imgs.search.brave.com/4SDZoxsmqy8oZLFsrc5e_aHVkYc4xZUh2T3Un4eaRuE/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9zdGF0/aWMudmVjdGVlenku/Y29tL3N5c3RlbS9y/ZXNvdXJjZXMvdGh1/bWJuYWlscy8wMjQv/NzY2Lzk1OC9zbWFs/bC9kZWZhdWx0LW1h/bGUtYXZhdGFyLXBy/b2ZpbGUtaWNvbi1z/b2NpYWwtbWVkaWEt/dXNlci1mcmVlLXZl/Y3Rvci5qcGc"
+                    }
                   />
                 </div>
               </div>
               <ul
                 tabIndex={0}
-                className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
+                className="menu menu-sm dropdown-content bg-base-300 rounded-box z-1 mt-3 w-52 p-2 shadow"
               >
                 <li>
                   <Link to="/profile">
                     <p className="justify-between">
-                      Profile
+                      My Profile
                       {/* <span className="badge">New</span> */}
                     </p>
                   </Link>
                 </li>
                 <li>
-                  <Link to="/">
-                    <p>Settings</p>
+                  <Link to="/connections">
+                    <p>My Connections</p>
                   </Link>
                 </li>
                 <li>
-                  <Link to="/login">
-                    <p onClick={handleLogout}>Logout</p>
-                  </Link>
+                  <p onClick={handleLogout}>Logout</p>
                 </li>
               </ul>
             </div>

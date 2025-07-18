@@ -6,9 +6,9 @@ const Profile = () => {
 
   return (
     <div className="flex justify-center mx-10">
-      <div className="">
+      {user && <div className="">
         <EditProfile user={user} />
-      </div>
+      </div>}
     </div>
   );
 };

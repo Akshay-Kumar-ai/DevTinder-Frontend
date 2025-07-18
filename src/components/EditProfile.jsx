@@ -1,22 +1,25 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
 import { Base_Url } from "../utils/constants";
 import { addUser } from "../utils/userSlice";
 import UserCard from "./userCard";
-const EditProfile = () => {
+const EditProfile = ({ user }) => {
+  //   const user = useSelector((appStore) => appStore?.user);
   const dispatch = useDispatch();
-  const user = useSelector((appStore) => appStore?.user);
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [age, setAge] = useState("");
-  const [about, setAbout] = useState("");
-  const [skills, setSkills] = useState("");
-  const [gender, setGender] = useState("");
+
+  const [firstName, setFirstName] = useState(user?.firstName);
+  const [lastName, setLastName] = useState(user?.lastName);
+  const [age, setAge] = useState(user?.age || "");
+  const [about, setAbout] = useState(user?.about);
+  const [skills, setSkills] = useState(user?.skills);
+  const [gender, setGender] = useState(user?.gender);
   const [photoUrl, setProfileUrl] = useState(
-    "https://imgs.search.brave.com/4SDZoxsmqy8oZLFsrc5e_aHVkYc4xZUh2T3Un4eaRuE/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9zdGF0/aWMudmVjdGVlenku/Y29tL3N5c3RlbS9y/ZXNvdXJjZXMvdGh1/bWJuYWlscy8wMjQv/NzY2Lzk1OC9zbWFs/bC9kZWZhdWx0LW1h/bGUtYXZhdGFyLXBy/b2ZpbGUtaWNvbi1z/b2NpYWwtbWVkaWEt/dXNlci1mcmVlLXZl/Y3Rvci5qcGc"
+    user?.photoUrl ||
+      "https://imgs.search.brave.com/4SDZoxsmqy8oZLFsrc5e_aHVkYc4xZUh2T3Un4eaRuE/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9zdGF0/aWMudmVjdGVlenku/Y29tL3N5c3RlbS9y/ZXNvdXJjZXMvdGh1/bWJuYWlscy8wMjQv/NzY2Lzk1OC9zbWFs/bC9kZWZhdWx0LW1h/bGUtYXZhdGFyLXBy/b2ZpbGUtaWNvbi1z/b2NpYWwtbWVkaWEt/dXNlci1mcmVlLXZl/Y3Rvci5qcGc"
   );
   const [error, setError] = useState("");
+  const [showToast, setShowToast] = useState(false);
 
   const saveProfile = async () => {
     setError("");
@@ -34,22 +37,24 @@ const EditProfile = () => {
         { withCredentials: true }
       );
       dispatch(addUser(res?.data?.data));
+      setShowToast(true);
+      setTimeout(() => {
+        setShowToast(false);
+      }, 2500);
     } catch (err) {
       setError(err?.response?.data);
     }
   };
 
-  useEffect(() => {
-    setFirstName(user?.firstName || "");
-    setLastName(user?.lastName || "");
-    setAge(user?.age || "");
-    setAbout(user?.about || "");
-    setSkills(user?.skills || "");
-    setGender(user?.gender || "");
-    setProfileUrl(user?.photoUrl || "");
-  }, [user]);
   return (
     <div className="flex justify-center m-10">
+      {showToast && (
+        <div className="toast toast-top toast-center z-10">
+          <div className="alert alert-success">
+            <span className="font-medium">Profile updated successfully !!</span>
+          </div>
+        </div>
+      )}
       {user && (
         <div className="px-5">
           <UserCard
@@ -111,13 +116,15 @@ const EditProfile = () => {
                 />
               </label>
               <p className="text-sm font-normal card-title">About:</p>
-              <label className="input validator">
-                <input
-                  type="text"
+              <fieldset className="fieldset">
+                {/* <legend className="fieldset-legend">Your bio</legend> */}
+                <textarea
+                  className="textarea h-24"
                   value={about}
                   onChange={(e) => setAbout(e.target.value)}
-                />
-              </label>
+                ></textarea>
+                <div className="label">Optional</div>
+              </fieldset>
 
               <div className="card-actions justify-between">
                 <p className="text-red-600">{error}</p>
