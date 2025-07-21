@@ -15,14 +15,20 @@ const Feed = () => {
         withCredentials: true,
       });
       dispatch(addFeed(res.data));
+      console.log(res.data);
     } catch (err) {
       console.error(err);
     }
-  };
+  }; 
 
   useEffect(() => {
     getFeed();
   }, []);
+
+  if (!feed) return;
+  if (feed.length === 0) {
+    return <h1 className="flex justify-center my-10">No New Users Found</h1>;
+  }
   return (
     <>
       <div className="flex justify-center">

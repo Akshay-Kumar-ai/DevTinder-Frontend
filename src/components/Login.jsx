@@ -8,8 +8,11 @@ import { addUser } from "../utils/userSlice";
 const Login = () => {
   const [emailId, setEmailId] = useState("shekhar@gmail.com");
   const [password, setPassword] = useState("Shekhar@123");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
+  const [isLoginForm, setIsLoginForm] = useState(true);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -33,11 +36,45 @@ const Login = () => {
       // console.error(err?.response?.data);
     }
   };
+
+  const handleSignUp = async () => {
+    try {
+      const res = await axios.post(
+        Base_Url + "/signup",
+        { firstName, lastName, emailId, password },
+        { withCredentials: true }
+      );
+      dispatch(addUser(res?.data?.data));
+      navigate("/profile");
+    } catch (err) {
+      setError(err?.response?.data || "Something went wrong");
+    }
+  };
   return (
     <div className="flex justify-center my-10">
       <div className="card bg-base-300 w-96 shadow-sm">
         <div className="card-body">
-          <h2 className="card-title">Login</h2>
+          <h2 className="card-title">{isLoginForm ? "Login" : "Sign Up"}</h2>
+          {!isLoginForm && (
+            <>
+              <label className="input validator">
+                <input
+                  type="text"
+                  value={firstName}
+                  placeholder="First Name"
+                  onChange={(e) => setFirstName(e.target.value)}
+                />
+              </label>
+              <label className="input validator">
+                <input
+                  type="text"
+                  value={lastName}
+                  placeholder="Last Name"
+                  onChange={(e) => setLastName(e.target.value)}
+                />
+              </label>
+            </>
+          )}
           <label className="input validator mt-2">
             <svg
               className="h-[1em] opacity-50"
@@ -94,7 +131,7 @@ const Login = () => {
             <button
               type="button"
               onClick={() => setShowPassword(!showPassword)}
-              className="absolute right-2 bg-transparent"
+              className="absolute right-2 bg-transparent cursor-pointer"
             >
               {password.length > 0 && (
                 <p className="text-gray-300 hover:text-gray-500">
@@ -113,10 +150,21 @@ const Login = () => {
           </p>
           <div className="card-actions justify-end">
             <p className="text-red-600">{error}</p>
-            <button className="btn btn-primary" onClick={handleLogin}>
-              Login
+            <button
+              className="btn btn-primary"
+              onClick={isLoginForm ? handleLogin : handleSignUp}
+            >
+              {isLoginForm ? "Login" : "Sign Up"}
             </button>
           </div>
+          <p
+            className="text-blue-300 hover:text-gray-300 cursor-pointer"
+            onClick={() => setIsLoginForm(!isLoginForm)}
+          >
+            {isLoginForm
+              ? "New User? Signup here"
+              : "Existing User? Login here"}
+          </p>
         </div>
       </div>
     </div>

@@ -12,8 +12,8 @@ const EditProfile = ({ user }) => {
   const [lastName, setLastName] = useState(user?.lastName);
   const [age, setAge] = useState(user?.age || "");
   const [about, setAbout] = useState(user?.about);
-  const [skills, setSkills] = useState(user?.skills);
-  const [gender, setGender] = useState(user?.gender);
+  const [skills, setSkills] = useState(user?.skills || "");
+  const [gender, setGender] = useState(user?.gender || "");
   const [photoUrl, setProfileUrl] = useState(
     user?.photoUrl ||
       "https://imgs.search.brave.com/4SDZoxsmqy8oZLFsrc5e_aHVkYc4xZUh2T3Un4eaRuE/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9zdGF0/aWMudmVjdGVlenku/Y29tL3N5c3RlbS9y/ZXNvdXJjZXMvdGh1/bWJuYWlscy8wMjQv/NzY2Lzk1OC9zbWFs/bC9kZWZhdWx0LW1h/bGUtYXZhdGFyLXBy/b2ZpbGUtaWNvbi1z/b2NpYWwtbWVkaWEt/dXNlci1mcmVlLXZl/Y3Rvci5qcGc"
@@ -67,6 +67,7 @@ const EditProfile = ({ user }) => {
               gender,
               photoUrl,
             }}
+            isProfile={true}
           />
         </div>
       )}

@@ -2,12 +2,13 @@ import { Provider } from "react-redux";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 import Body from "./components/Body";
+import Chat from "./components/Chat";
+import Connections from "./components/Connections";
 import Feed from "./components/Feed";
 import Login from "./components/Login";
 import Profile from "./components/Profile";
-import appStore from "./utils/appStore";
 import Requests from "./components/Requests";
-import Connections from "./components/Connections";
+import appStore from "./utils/appStore";
 
 function App() {
   return (
@@ -60,6 +61,14 @@ function App() {
                 element={
                   <>
                     <Requests />
+                  </>
+                }
+              />
+              <Route
+                path="/chat/:targetUserId"
+                element={
+                  <>
+                    <Chat />
                   </>
                 }
               />
