@@ -6,6 +6,7 @@ import Chat from "./components/Chat";
 import Connections from "./components/Connections";
 import Feed from "./components/Feed";
 import Login from "./components/Login";
+import Premium from "./components/Premium";
 import Profile from "./components/Profile";
 import Requests from "./components/Requests";
 import appStore from "./utils/appStore";
@@ -69,6 +70,14 @@ function App() {
                 element={
                   <>
                     <Chat />
+                  </>
+                }
+              />
+              <Route
+                path="/premium"
+                element={
+                  <>
+                    <Premium />
                   </>
                 }
               />
