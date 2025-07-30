@@ -9,7 +9,6 @@ const Feed = () => {
   const feed = useSelector((store) => store.feed);
   const dispatch = useDispatch();
   const getFeed = async () => {
-    if (feed) return;
     try {
       const res = await axios.get(Base_Url + "/feed?page=1&limit=50", {
         withCredentials: true,
