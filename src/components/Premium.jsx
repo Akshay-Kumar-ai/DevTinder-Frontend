@@ -110,7 +110,7 @@ const Premium = () => {
                   d="M5 13l4 4L19 7"
                 />
               </svg>
-              <span>Batch processing capabilities</span>
+              <span>Messages length will be smaller than 100</span>
             </li>
             <li>
               <svg
@@ -129,10 +129,11 @@ const Premium = () => {
               </svg>
               <span>AI-driven image enhancements</span>
             </li>
-            <li className="opacity-50">
+
+            <li className="opacity-100">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="size-4 me-2 inline-block text-base-content/50"
+                className="size-4 me-2 inline-block text-success"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -144,26 +145,7 @@ const Premium = () => {
                   d="M5 13l4 4L19 7"
                 />
               </svg>
-              <span className="line-through">Seamless cloud integration</span>
-            </li>
-            <li className="opacity-50">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="size-4 me-2 inline-block text-base-content/50"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M5 13l4 4L19 7"
-                />
-              </svg>
-              <span className="line-through">
-                Real-time collaboration tools
-              </span>
+              <span className="">Real-time chat tools</span>
             </li>
           </ul>
           <div className="mt-6">
@@ -218,6 +200,7 @@ const Premium = () => {
               </svg>
               <span>Customizable style templates</span>
             </li>
+
             <li>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -233,8 +216,9 @@ const Premium = () => {
                   d="M5 13l4 4L19 7"
                 />
               </svg>
-              <span>Batch processing capabilities</span>
+              <span>Messages length will be greater than 500</span>
             </li>
+
             <li>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -252,10 +236,10 @@ const Premium = () => {
               </svg>
               <span>AI-driven image enhancements</span>
             </li>
-            <li className="opacity-50">
+            <li className="opacity-100">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="size-4 me-2 inline-block text-base-content/50"
+                className="size-4 me-2 inline-block text-success"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -267,12 +251,12 @@ const Premium = () => {
                   d="M5 13l4 4L19 7"
                 />
               </svg>
-              <span className="line-through">Seamless cloud integration</span>
+              <span className="">Real-time chat tools</span>
             </li>
             <li className="opacity-50">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="size-4 me-2 inline-block text-base-content/50"
+                className="size-4 me-2 inline-block text-success"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -284,8 +268,8 @@ const Premium = () => {
                   d="M5 13l4 4L19 7"
                 />
               </svg>
-              <span className="line-through">
-                Real-time collaboration tools
+              <span className="">
+                Can Play Games with Connections{" (in progress)"}
               </span>
             </li>
           </ul>

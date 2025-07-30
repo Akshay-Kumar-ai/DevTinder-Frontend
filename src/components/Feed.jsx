@@ -11,7 +11,7 @@ const Feed = () => {
   const getFeed = async () => {
     if (feed) return;
     try {
-      const res = await axios.get(Base_Url + "/feed", {
+      const res = await axios.get(Base_Url + "/feed?page=1&limit=50", {
         withCredentials: true,
       });
       dispatch(addFeed(res.data));

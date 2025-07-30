@@ -6,8 +6,8 @@ import { Base_Url } from "../utils/constants";
 import { addUser } from "../utils/userSlice";
 // import { Eye, EyeOff } from "lucide-react";
 const Login = () => {
-  const [emailId, setEmailId] = useState("shekhar@gmail.com");
-  const [password, setPassword] = useState("Shekhar@123");
+  const [emailId, setEmailId] = useState("");
+  const [password, setPassword] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [showPassword, setShowPassword] = useState(false);
