@@ -100,7 +100,9 @@ const EditProfile = ({ user }) => {
                   onChange={(e) => setProfileUrl(e.target.value)}
                 />
               </label>
-              <p className="text-sm font-normal card-title">Age:</p>
+              <p className="text-sm font-normal card-title">
+                Age:{" +18 Allowed"}
+              </p>
               <label className="input validator">
                 <input
                   type="text"
@@ -108,7 +110,9 @@ const EditProfile = ({ user }) => {
                   onChange={(e) => setAge(e.target.value)}
                 />
               </label>
-              <p className="text-sm font-normal card-title">Gender:</p>
+              <p className="text-sm font-normal card-title">
+                Gender:+{" (male,female,others)"}
+              </p>
               <label className="input validator">
                 <input
                   type="text"
